@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>エンジニア紹介ページ | TAJIMA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --text: #22212B;
+    --sub-text: #74718A;
+    --purple: #7C5CFC;
+    --pink: #FF6FA5;
+    --orange: #FFA24C;
+    --teal: #2BC7B0;
+    --blue: #3D8BFF;
+    --card-bg: #FAF9FF;
+    --line: #ECE9FA;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Zen Maru Gothic", "Hiragino Sans", "Yu Gothic", sans-serif;
+    line-height: 1.8;
+    font-size: 19px;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .en { font-family: "Poppins", "Zen Maru Gothic", sans-serif; }
+
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  a { color: inherit; }
+
+  /* ===== Header ===== */
+  header.site-header {
+    padding: 28px 0;
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    z-index: 20;
+    border-bottom: 1px solid var(--line);
+  }
+  header.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  header.site-header .name {
+    font-size: 22px;
+    font-weight: 700;
+  }
+  header.site-header .name .emoji { margin-right: 6px; }
+  header.site-header nav a {
+    text-decoration: none;
+    margin-left: 24px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    padding: 8px 16px;
+    border-radius: 999px;
+    transition: background .2s, color .2s, transform .2s;
+    display: inline-block;
+  }
+  header.site-header nav a:hover {
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  /* ===== Hero ===== */
+  section.hero {
+    position: relative;
+    padding: 90px 0 110px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #EFE9FF 0%, #FFF0F5 55%, #FFF7E9 100%);
+    border-bottom: 1px solid var(--line);
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    opacity: 0.55;
+  }
+  .blob1 { width: 220px; height: 220px; background: var(--purple); top: -60px; right: -40px; opacity: .25; }
+  .blob2 { width: 160px; height: 160px; background: var(--orange); bottom: -50px; left: -30px; opacity: .3; }
+  .blob3 { width: 90px; height: 90px; background: var(--teal); top: 40%; right: 15%; opacity: .25; }
+
+  section.hero .hero-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .avatar {
+    width: 140px;
+    height: 140px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    box-shadow: 0 18px 40px -12px rgba(124,92,252,0.55);
+    border: 6px solid #fff;
+  }
+  section.hero h1 {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  section.hero .role {
+    font-size: 22px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--purple), var(--pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+  }
+  section.hero .intro {
+    font-size: 18px;
+    color: var(--text);
+    max-width: 640px;
+    margin-bottom: 24px;
+  }
+  section.hero .tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  section.hero .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: #fff;
+    color: var(--text);
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 999px;
+    box-shadow: 0 6px 16px -6px rgba(34,33,43,0.18);
+  }
+
+  /* ===== Section common ===== */
+  section {
+    padding: 90px 0;
+  }
+  section h2 {
+    font-size: 30px;
+    font-weight: 900;
+    margin-bottom: 44px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  section h2 .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    font-size: 24px;
+  }
+
+  /* ===== Career Timeline ===== */
+  #career { background: #FBFAFF; }
+  #career h2 .badge { background: linear-gradient(135deg, var(--purple), var(--blue)); }
+
+  .timeline {
+    position: relative;
+    padding-left: 36px;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 9px;
+    top: 6px;
+    bottom: 6px;
+    width: 3px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, var(--purple), var(--pink), var(--orange));
+  }
+  .timeline-item {
+    position: relative;
+    padding-bottom: 44px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px 28px 28px 32px;
+    margin-bottom: 28px;
+    box-shadow: 0 10px 30px -14px rgba(34,33,43,0.15);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .timeline-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px -14px rgba(124,92,252,0.35);
+  }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-item::before {
+    content: "🚀";
+    position: absolute;
+    left: -46px;
+    top: 26px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    box-shadow: 0 4px 10px -2px rgba(34,33,43,0.25);
+  }
+  .timeline-item .period {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .timeline-item h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .timeline-item .role-tag {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--purple);
+    background: #F1EEFF;
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+    margin-left: 6px;
+  }
+  .timeline-item p.desc {
+    font-size: 17px;
+    color: var(--text);
+    max-width: 720px;
+  }
+  .timeline-item ul {
+    margin-top: 12px;
+    padding-left: 4px;
+    list-style: none;
+  }
+  .timeline-item ul li {
+    font-size: 16px;
+    margin-bottom: 6px;
+    padding-left: 26px;
+    position: relative;
+  }
+  .timeline-item ul li::before {
+    content: "✅";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 14px;
+  }
+  .timeline-item .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .timeline-item .skill-tags span {
+    background: #FFF3E8;
+    color: #B5691A;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+
+  /* ---- Grouped project (同一案件で複数フェーズ) ---- */
+  .group-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding-bottom: 22px;
+    margin-bottom: 24px;
+    border-bottom: 2px dashed var(--line);
+  }
+  .group-icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 22px -12px rgba(34,33,43,0.35);
+  }
+  .group-icon.mobility { background: linear-gradient(135deg, var(--purple), var(--blue)); }
+  .group-icon.house { background: linear-gradient(135deg, var(--orange), var(--pink)); }
+  .group-header h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .group-period {
+    font-size: 14px;
+    color: var(--sub-text);
+    font-weight: 700;
+  }
+  .group-note {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #B5691A;
+    background: #FFF3E8;
+    padding: 3px 12px;
+    border-radius: 999px;
+  }
+  .phase-list {
+    position: relative;
+  }
+  .phase-item {
+    display: flex;
+    gap: 16px;
+    position: relative;
+    padding-bottom: 30px;
+  }
+  .phase-item:last-child { padding-bottom: 0; }
+  .phase-item::before {
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: 34px;
+    bottom: -30px;
+    width: 2px;
+    background: var(--line);
+  }
+  .phase-item:last-child::before { display: none; }
+  .phase-num {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+  .phase-num::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--purple);
+  }
+  .phase-body { flex: 1; min-width: 0; }
+  .phase-body .phase-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .phase-body .period { margin-bottom: 0; }
+  .phase-body .role-tag { margin: 0; }
+  .phase-body h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .phase-body p.desc {
+    font-size: 16px;
+  }
+  .phase-body ul { margin-top: 8px; }
+  .phase-body ul li { font-size: 15px; }
+  .phase-body .skill-tags { margin-top: 10px; }
+
+  /* ===== Skills ===== */
+  #skills h2 .badge { background: linear-gradient(135deg, var(--teal), var(--blue)); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .skill-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 30px 26px;
+    text-align: left;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 8px 24px -14px rgba(34,33,43,0.18);
+  }
+  .skill-card:hover {
+    transform: translateY(-6px) rotate(-0.5deg);
+    box-shadow: 0 18px 34px -14px rgba(124,92,252,0.4);
+  }
+  .skill-card .icon {
+    font-size: 40px;
+    margin-bottom: 14px;
+    display: inline-block;
+  }
+  .skill-card:nth-child(1) { border-bottom: 5px solid var(--orange); }
+  .skill-card:nth-child(2) { border-bottom: 5px solid var(--purple); }
+  .skill-card:nth-child(3) { border-bottom: 5px solid var(--teal); }
+  .skill-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .skill-card p {
+    font-size: 16px;
+    color: var(--sub-text);
+  }
+
+  /* ===== Qualifications ===== */
+  #qualifications { background: #FBFAFF; }
+  #qualifications h2 .badge { background: linear-gradient(135deg, var(--orange), var(--pink)); }
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .cert-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #fff;
+    border: 2px solid var(--line);
+    border-radius: 18px;
+    padding: 20px 22px;
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+  }
+  .cert-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--orange);
+    box-shadow: 0 14px 30px -16px rgba(255,162,76,0.5);
+  }
+  .cert-card .cert-icon {
+    font-size: 30px;
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #FFF3E8, #FFE6EF);
+    border-radius: 14px;
+  }
+  .cert-card .cert-name {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .cert-card .cert-date {
+    font-size: 13px;
+    color: var(--sub-text);
+    font-weight: 700;
+  }
+
+  /* ===== Contact ===== */
+  #contact {
+    background: linear-gradient(135deg, #7C5CFC 0%, #FF6FA5 100%);
+    color: #fff;
+    border-radius: 32px;
+    margin: 0 24px 90px;
+    max-width: 932px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  #contact h2 {
+    justify-content: center;
+    color: #fff;
+  }
+  #contact h2 .badge { background: rgba(255,255,255,0.25); }
+  #contact p {
+    font-size: 17px;
+    margin-bottom: 8px;
+    opacity: 0.95;
+  }
+  #contact a {
+    color: #fff;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+  .contact-btn {
+    display: inline-block;
+    margin-top: 20px;
+    background: #fff;
+    color: var(--purple);
+    font-weight: 700;
+    padding: 14px 32px;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 10px 24px -8px rgba(0,0,0,0.3);
+  }
+
+  footer {
+    padding: 36px 0;
+  }
+  footer .container {
+    font-size: 14px;
+    color: var(--sub-text);
+    text-align: center;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 640px) {
+    body { font-size: 17px; }
+    section.hero { padding: 60px 0 70px; }
+    .hero-inner { flex-direction: column; text-align: center; }
+    section.hero h1 { font-size: 34px; }
+    section.hero .role { font-size: 18px; }
+    section { padding: 60px 0; }
+    section h2 { font-size: 24px; margin-bottom: 32px; }
+    header.site-header nav a { margin-left: 8px; font-size: 13px; padding: 6px 10px; }
+    .timeline { padding-left: 28px; }
+    .timeline-item { padding-left: 24px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="container">
+      <div class="name"><span class="emoji">☁️</span>エンジニア紹介ページ</div>
+      <nav>
+        <a href="#skills">🛠️ スキル</a>
+        <a href="#career">💼 職務経歴</a>
+        <a href="#qualifications">🏅 資格</a>
+        <a href="#contact">📩 連絡先</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Hero / Profile ===== -->
+  <section class="hero">
+    <span class="blob blob1"></span>
+    <span class="blob blob2"></span>
+    <span class="blob blob3"></span>
+    <div class="container hero-inner">
+      <div class="avatar">☁️</div>
+      <div>
+        <h1>TAJIMA</h1>
+        <div class="role">☁️ クラウドエンジニア</div>
+        <p class="intro">
+          AWSを中心としたクラウド基盤の設計・構築から、SREとしての信頼性向上、
+          日々の保守運用までを一貫して担当しています。
+          安定したシステム運用と、変化に強いインフラづくりを大切にしています🚀
+        </p>
+        <div class="tags">
+          <span class="tag">☁️ AWS</span>
+          <span class="tag">📐 設計</span>
+          <span class="tag">🔧 保守運用</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Skills ===== -->
+  <section id="skills">
+    <div class="container">
+      <h2><span class="badge">🛠️</span>スキル・専門分野</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <span class="icon">☁️</span>
+          <h3>AWS</h3>
+          <p>クラウドインフラの設計・構築・運用。主要サービスを用いたシステム基盤の実装経験。</p>
+        </div>
+        <div class="skill-card">
+          <span class="icon">📐</span>
+          <h3>設計</h3>
+          <p>運用設計、AWS・Azureの監視設計、IF仕様検討など、上流工程の設計業務。</p>
+        </div>
+        <div class="skill-card">
+          <span class="icon">🔧</span>
+          <h3>保守運用</h3>
+          <p>本番システムの日常保守、安定運用のためのオペレーション。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Career (職務経歴) ===== -->
+  <section id="career">
+    <div class="container">
+      <h2><span class="badge">💼</span>職務経歴</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="period">2026年3月 〜 2026年6月</div><span class="role-tag">メンバー</span>
+          <h3>AWS開発（V1Gサービス）</h3>
+          <p class="desc">V1Gサービス向け新規システム開発プロジェクトに参加。バックエンド開発担当として、要件定義・基本設計など上流工程レビューにも参加。開発開始前フェーズでIF設計・ドメイン理解・AI駆動開発導入に向けた技術調査/検証を実施。</p>
+          <ul>
+            <li>要件定義書レビューおよび仕様整理</li>
+            <li>IF仕様書作成・基本設計書作成</li>
+            <li>AI駆動開発導入に向けた技術調査／検証</li>
+            <li>ドメイン理解および業務知識キャッチアップ</li>
+          </ul>
+          <div class="skill-tags">
+            <span>AWS</span><span>Slack</span><span>Backlog</span><span>Mermaid</span><span>Markdown</span>
+            <span>GitHub</span><span>GitHub Copilot</span><span>Claude Code</span><span>JSON</span>
+          </div>
+        </div>
+
+        <div class="timeline-item project-group">
+          <div class="group-header">
+            <span class="group-icon mobility">🚗</span>
+            <div>
+              <h3>モビリティサービス向けプロジェクト</h3>
+              <div class="group-period">2024年6月 〜 2025年12月</div>
+              <span class="group-note">同一案件内で3つの役割・業務を担当</span>
+            </div>
+          </div>
+          <div class="phase-list">
+            <div class="phase-item">
+              <div class="phase-num"></div>
+              <div class="phase-body">
+                <div class="phase-meta">
+                  <span class="period">2024年11月 〜 2025年12月</span><span class="role-tag">PL</span>
+                </div>
+                <h4>インシデント発生時の運用構築を統括</h4>
+                <p class="desc">運用請負サービスの立ち上げに伴い、PLとして監視設計からL1〜L3の運用定義、手順書・フロー整備までを一貫して担当。</p>
+                <ul>
+                  <li>要件定義・見積作成・スケジュール策定</li>
+                  <li>顧客折衝・ベンダーコントロール・課題管理</li>
+                  <li>月平均13案件を並行管理し、納期順守と品質確保を両立</li>
+                </ul>
+                <div class="skill-tags">
+                  <span>AWS</span><span>CloudWatch</span><span>Azure</span><span>Application Insights</span>
+                  <span>Datadog</span><span>New Relic</span><span>Jira</span><span>Confluence</span><span>Backlog</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="phase-item">
+              <div class="phase-num"></div>
+              <div class="phase-body">
+                <div class="phase-meta">
+                  <span class="period">2024年11月 〜 2025年8月</span><span class="role-tag">PL</span>
+                </div>
+                <h4>案件受付・見積作成のアプリ開発を主導</h4>
+                <p class="desc">見積作成業務の転記工数や作業者ごとのばらつきを課題とし、kintoneを用いたシステム化により業務標準化・効率化を推進。</p>
+                <ul>
+                  <li>kintoneを用いた見積管理アプリの要件定義・設計</li>
+                  <li>計算ロジック・自動化処理の設計</li>
+                  <li>UI/UX改善、紙・Excel業務のアプリ化を推進</li>
+                </ul>
+                <div class="skill-tags">
+                  <span>kintone</span><span>JavaScript</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="phase-item">
+              <div class="phase-num"></div>
+              <div class="phase-body">
+                <div class="phase-meta">
+                  <span class="period">2024年6月 〜 2025年12月</span><span class="role-tag">メンバー</span>
+                </div>
+                <h4>インシデント発生時の運用構築を実務担当</h4>
+                <p class="desc">AWS・Azure環境を中心に監視・ログ基盤の設計から、インシデント対応フロー（L1〜L3）の策定、運用定着までを担当。</p>
+                <ul>
+                  <li>AWS CloudWatch / Azure Application Insightsによる監視・アラート設計</li>
+                  <li>Datadog・New Relicを活用したログ基盤設計</li>
+                  <li>運用テストの実施、説明会・運用ドキュメント作成</li>
+                </ul>
+                <div class="skill-tags">
+                  <span>AWS</span><span>CloudWatch</span><span>Azure</span><span>Application Insights</span>
+                  <span>Datadog</span><span>New Relic</span><span>Jira</span><span>Confluence</span><span>Backlog</span>
+                  <span>Linux</span><span>Windows</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="period">2023年1月 〜 2023年8月</div><span class="role-tag">メンバー</span>
+          <h3>社内SE（電子部品卸売業）</h3>
+          <p class="desc">Windows環境を中心にITインフラおよび社内システムの運用管理を担当し、社内IT環境の安定運用を支援。</p>
+          <ul>
+            <li>PCキッティング、Active Directoryによるアカウント管理</li>
+            <li>Microsoft 365に関する問い合わせ対応</li>
+            <li>国内外拠点のネットワーク設定（Meraki）</li>
+          </ul>
+          <div class="skill-tags">
+            <span>Active Directory</span><span>Microsoft 365</span><span>Meraki</span><span>SAP</span><span>楽々精算</span>
+          </div>
+        </div>
+
+        <div class="timeline-item project-group">
+          <div class="group-header">
+            <span class="group-icon house">🏠</span>
+            <div>
+              <h3>住宅メーカー向け基盤システム開発</h3>
+              <div class="group-period">2019年12月 〜 2022年12月</div>
+              <span class="group-note">同一案件内で2つのフェーズを担当</span>
+            </div>
+          </div>
+          <div class="phase-list">
+            <div class="phase-item">
+              <div class="phase-num"></div>
+              <div class="phase-body">
+                <div class="phase-meta">
+                  <span class="period">2022年4月 〜 2022年12月</span><span class="role-tag">メンバー</span>
+                </div>
+                <h4>運用改善・導入支援フェーズ</h4>
+                <p class="desc">運用課題を整理し、運用ルールでの対応可否とシステム改修の必要性を切り分けながら改善方針を策定。</p>
+                <ul>
+                  <li>運用課題・ユーザー要望のヒアリングと要件定義書作成</li>
+                  <li>導入時のシステム説明会、初期マスタ登録支援</li>
+                  <li>リリース調整（月1〜3件程度）</li>
+                </ul>
+                <div class="skill-tags">
+                  <span>Excel</span><span>ExcelVBA</span><span>PowerPoint</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="phase-item">
+              <div class="phase-num"></div>
+              <div class="phase-body">
+                <div class="phase-meta">
+                  <span class="period">2019年12月 〜 2022年3月</span><span class="role-tag">メンバー</span>
+                </div>
+                <h4>運用保守・テクニカルサポートフェーズ</h4>
+                <p class="desc">ユーザー問い合わせ対応を担当し、過去事例のナレッジ化により迅速かつ安定した対応を実現。</p>
+                <ul>
+                  <li>問い合わせ一次対応（同種事象は5分以内で回答）</li>
+                  <li>検証環境でのエラー再現テスト・原因調査</li>
+                  <li>ユーザー向けマニュアルの作成・改訂</li>
+                </ul>
+                <div class="skill-tags">
+                  <span>Excel</span><span>ExcelVBA</span><span>PowerPoint</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="period">2018年4月 〜 2019年3月</div><span class="role-tag">社長秘書</span>
+          <h3>社長秘書</h3>
+          <p class="desc">経営層直下で社長の意思決定と全社業務をつなぐハブ役として、指示整理・進捗管理・対外連絡を担当。</p>
+          <ul>
+            <li>社長指示の内容精査・優先順位付け・各部署への展開</li>
+            <li>スケジュール管理（社内外アポイント調整、会議設定）</li>
+            <li>1日約100件に及ぶ指示対応状況の管理・調整</li>
+          </ul>
+          <div class="skill-tags">
+            <span>Excel</span><span>PowerPoint</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Qualifications (資格) ===== -->
+  <section id="qualifications">
+    <div class="container">
+      <h2><span class="badge">🏅</span>資格</h2>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <span class="cert-icon">🏅</span>
+          <div>
+            <div class="cert-name">AWS Certified Solutions Architect - Professional</div>
+            <div class="cert-date">2026年1月</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <span class="cert-icon">🏅</span>
+          <div>
+            <div class="cert-name">AWS Certified Solutions Architect - Associate</div>
+            <div class="cert-date">2025年5月</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <span class="cert-icon">🏅</span>
+          <div>
+            <div class="cert-name">AWS Certified Cloud Practitioner</div>
+            <div class="cert-date">2025年1月</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <span class="cert-icon">🏅</span>
+          <div>
+            <div class="cert-name">kintone認定 アソシエイト</div>
+            <div class="cert-date">2024年6月</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <span class="cert-icon">🏅</span>
+          <div>
+            <div class="cert-name">Python3エンジニア認定基礎試験</div>
+            <div class="cert-date">2023年11月</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <span class="cert-icon">🏅</span>
+          <div>
+            <div class="cert-name">エクセルVBAエキスパート</div>
+            <div class="cert-date">2023年7月</div>
+          </div>
+        </div>
+        <div class="cert-card">
+          <span class="cert-icon">🏅</span>
+          <div>
+            <div class="cert-name">情報処理検定２級</div>
+            <div class="cert-date">2014年4月</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section id="contact">
+    <div class="container">
+      <h2><span class="badge">📩</span>連絡先</h2>
+      <p>お気軽にご連絡ください！</p>
+      <p><a href="mailto:tajima011222@gmail.com">tajima011222@gmail.com</a></p>
+      <a class="contact-btn" href="mailto:tajima011222@gmail.com">✉️ メールを送る</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © TAJIMA ☁️
+    </div>
+  </footer>
+
+</body>
+</html>
